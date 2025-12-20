@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Praktikum | Samad Idrizaj</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --card: #1e1e1e;
+      --text: #e0e0e0;
+      --muted: #a0a0a0;
+      --accent: #4f9dff;
+      --border: #2c2c2c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, #121212, #1a1a1a);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    header h1 {
+      font-size: clamp(2.6rem, 6vw, 3.4rem);
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 1.15rem;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(24, 24, 24, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    section {
+      padding: 4rem 1.5rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      padding: 2.2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #ffffff;
+    }
+
+    h3 {
+      margin-top: 1.2rem;
+      color: #e0e0e0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill {
+      padding: 1.4rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      background: #2a2a2a;
+    }
+
+    .skill span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .download a {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    .download a:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    /* Kontaktbereich */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+      margin-top: 1.2rem;
+    }
+
+    .contact-item {
+      border: 1px solid var(--border);
+      background: #2a2a2a;
+      border-radius: 1rem;
+      padding: 1.4rem;
+    }
+
+    .contact-label {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .contact-value {
+      color: #ffffff;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .contact-value a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .contact-value a:hover {
+      color: var(--accent);
+    }
+
+    .email-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      margin-top: 1.6rem;
+      padding: 0.95rem 1.2rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .email-button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    /* Mobile: untereinander */
+    @media (max-width: 720px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    footer {
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      background: #1e1e1e;
+    }
+
+    @media print {
+      nav, header, footer, section:not(#lebenslauf) {
+        display: none !important;
+      }
+
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+
+      #lebenslauf {
+        padding: 0;
+        margin: 0;
+      }
+
+      .card {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 2rem;
+      }
+
+      .download {
+        display: none;
+      }
+
+      /* Kontaktbereich im Druck ausblenden */
+      #kontaktfeld {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="#start">Start</a></li>
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#lebenslauf">Lebenslauf</a></li>
+      <li><a href="#kontaktfeld">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <header id="start">
+    <h1>Samad Idrizaj</h1>
+    <p>14 Jahre · Schüler der 9. Klasse am Naturwissenschaftlichen Gymnasium Mengen · Interessiert an einem Praktikum im Bereich Wirtschaft oder IT</p>
+  </header>
+
+  <section id="profil">
+    <div class="card">
+      <h2>Über mich</h2>
+      <p>
+        Mein Name ist Samad Idrizaj, ich bin 14 Jahre alt und besuche derzeit die 9. Klasse des
+        Naturwissenschaftlichen Gymnasiums in Mengen. Schon seit meiner Kindheit interessiere
+        ich mich stark für wirtschaftliche sowie informationstechnische Themen.
+      </p>
+      <p style="margin-top:1rem;">
+        Im Rahmen des Schulpraktikums möchte ich erste praktische Erfahrungen sammeln,
+        neue Einblicke gewinnen und mein Interesse weiter vertiefen. Ich bin sehr motiviert,
+        lernbereit und arbeite zuverlässig sowie konzentriert an neuen Aufgaben.
+      </p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="card">
+      <h2>Skills & Kenntnisse</h2>
+      <div class="grid">
+        <div class="skill"><span>Computerkenntnisse</span><br />Solide Grundlagen</div>
+        <div class="skill"><span>Teamfähigkeit</span><br />Sehr gut</div>
+        <div class="skill"><span>Soziale Kompetenz</span><br />Ausgeprägt</div>
+        <div class="skill"><span>Kombinationsfähigkeit</span><br />Versteht Zusammenhänge schnell</div>
+        <div class="skill"><span>Motivation</span><br />Sehr hoch</div>
+        <div class="skill"><span>Lernbereitschaft</span><br />Ausgezeichnet</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lebenslauf">
+    <div class="card">
+      <h2>Lebenslauf</h2>
+
+      <h3>Persönliche Daten</h3>
+      <p>
+        <strong>Name:</strong> Samad Idrizaj<br />
+        <strong>Geburtsdatum:</strong> 21.05.2011<br />
+        <strong>Alter:</strong> 14 Jahre<br />
+        <strong>Wohnort:</strong> Mengen
+      </p>
+
+      <h3 style="margin-top:1.5rem;">Schulbildung</h3>
+      <p>
+        Seit 2024<br />
+        <strong>Naturwissenschaftliches Gymnasium Mengen</strong><br />
+        Klasse 9<br />
+        <strong>Schulische Schwerpunkte:</strong> Informatik, Wirtschaft, Deutsch, Englisch
+      </p>
+
+      <h3 style="margin-top:1.5rem;">Praktikum</h3>
+      <p>
+        <strong>Schulpraktikum:</strong> Oktober 2026 (1 Woche)<br />
+        Bereich <strong>Wirtschaft oder IT</strong><br />
+        Ziel: Erste praktische Erfahrungen sammeln und Einblicke in den Berufsalltag gewinnen.
+      </p>
+
+      <h3 style="margin-top:1.5rem;">Kenntnisse & Stärken</h3>
+      <ul style="margin-left:1.2rem; margin-top:0.5rem;">
+        <li>Solide Computerkenntnisse (tägliche Nutzung eines eigenen PCs)</li>
+        <li>Grundlegende Erfahrung durch schulische Gruppenprojekte und Referate</li>
+        <li>Hohe Lernbereitschaft und sehr große Motivation</li>
+        <li>Teamfähig, sozial kompetent und zuverlässig</li>
+        <li>Gute Kombinationsfähigkeit und schnelles Verständnis von Zusammenhängen</li>
+      </ul>
+
+      <div class="download" style="margin-top:2rem;">
+        <a href="javascript:window.print()">Lebenslauf drucken / als PDF speichern</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontaktfeld">
+    <div class="card">
+      <h2>Kontakt</h2>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-label">E-Mail 📧</div>
+          <div class="contact-value">
+            <a href="mailto:Samad.idrizaj@icloud.com">Samad.idrizaj@icloud.com</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-label">Handynummer 📞 </div>
+          <div class="contact-value">
+            <a href="tel:+4915258570789">+49 1525 8570789</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-label">Adresse 📍 </div>
+          <div class="contact-value">
+            Krauchenwieserstraße 12<br />
+            88512 Mengen
+          </div>
+        </div>
+      </div>
+
+      <a
+        class="email-button"
+        href="mailto:Samad.idrizaj@icloud.com?subject=Praktikum%20Anfrage&body=Hallo%20Samad%2C%0D%0A%0D%0A"
+        aria-label="E-Mail senden"
+      >
+        📧 E-Mail senden
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    Kontakt: <a href="mailto:Samad.idrizaj@icloud.com">Samad.idrizaj@icloud.com</a><br />
+    © 2025 Samad Idrizaj · Praktikumsbewerbung
+  </footer>
+
+</body>
+</html>
